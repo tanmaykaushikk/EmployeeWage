@@ -47,4 +47,5 @@ function totalWorkingHours(totalTime){
     workingHours = totalTime;
     console.log(workingHours);
 }
+
 totalWorkingHours(totalTime);
