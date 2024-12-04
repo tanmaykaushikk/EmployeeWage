@@ -67,5 +67,6 @@ function calculateFullTimeMonthlyWage(){
     console.log(monthlyFullTimeWage);
     return monthlyFullTimeWage;
 }
+
 calculatePartTimeMonthlyWage(totalDays);
 calculateFullTimeMonthlyWage(totalDays);
