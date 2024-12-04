@@ -89,5 +89,6 @@ function calculateWages(){
     console.log(`Total Working Hours:${totalWorkingHours}`);
     console.log(`Total Wage:${totalWage}`);
 }
+
 calculateWages();
 
