@@ -68,6 +68,7 @@ function getDailyWorkingHours(){
             return fullTime;
         default:
             return 0;
+            
     }
 }
 
