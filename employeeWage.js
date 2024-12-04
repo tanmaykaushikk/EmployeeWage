@@ -22,5 +22,6 @@ function calculateDailyWage(){
             break;
     }
     console.log(dailyWage);
+    
 }
 calculateDailyWage();
