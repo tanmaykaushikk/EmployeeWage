@@ -11,5 +11,7 @@ const attendance = () =>{
     }
 
     return isPresent;
+    
 }
 console.log(attendance());
+
