@@ -83,12 +83,12 @@ function calculateWages(){
         totalWorkingHours += dailyHours;
         totalWage += dailyHours*wagePerHour;
 
-        
         console.log(`Day${totalWorkingDays}: Worked ${dailyHours} hours , Total Hours:${totalWorkingHours} , Daily Wage:$${totalWage}`);
     }
     console.log(`Total Working Days:${totalWorkingDays}`);
     console.log(`Total Working Hours:${totalWorkingHours}`);
     console.log(`Total Wage:${totalWage}`);
 }
+
 calculateWages();
 
