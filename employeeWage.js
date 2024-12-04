@@ -15,10 +15,11 @@ const attendance = () =>{
     }else{
         // assign false if absent
         isPresent = false;
+        
     }
 
     return isPresent;
-    
+
 }
 console.log(attendance());
 
