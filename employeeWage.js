@@ -4,65 +4,21 @@ const wagePerHour = 20;
 const maxWorkingHours = 160;
 const maxWorkingDays = 20;
 
+const monthNames = [
+    "January", "February", "March", "April", "May", "June", 
+    "July", "August", "September", "October", "November", "December"
+];
 
-const attendance = () =>{
-    const randomValue = Math.floor(Math.random()*2);    // either value to be 0 or 1.
-    let isPresent;
+const attendance = () => {
+    const randomValue = Math.floor(Math.random() * 2); // Either value to be 0 or 1.
+    return randomValue === 0; // True if present, false if absent
+};
 
-    if(randomValue === 0){
-        //assign true if present
-        isPresent = true;        
-    }else{
-        // assign false if absent
-        isPresent = false;
-    }
-
-    return isPresent;
-}
-console.log(attendance());
-
-
-function calculateDailyWage(){
-
-    const totalTime = Math.floor(Math.random()*3);   // 0: No Time  , 1: Part Time , 2: Full Time
-    let dailyWage = 0;
-
-    switch (totalTime){
+function getDailyWorkingHours() {
+    const workType = Math.floor(Math.random() * 3); // 0: No Time, 1: Part Time, 2: Full Time
+    switch (workType) {
         case 0:
-            console.log("No Time");
-            dailyWage = 0;
-            break;
-        case 1:
-            console.log("Part Time");
-            dailyWage = partTime*wagePerHour;
-            break;
-        case 2:
-            console.log("Full Time");
-            dailyWage = fullTime*wagePerHour;
-            break;
-    }
-    console.log(dailyWage);
-    
-}
-calculateDailyWage();
-
-
-const totalTime = Math.floor(Math.random()*8); // total working hours from 0 to 8;
-let workingHours;
-
-function totalWorkingHours(totalTime){
-    workingHours = totalTime;
-    console.log(workingHours);
-}
-totalWorkingHours(totalTime);
-
-
-function getDailyWorkingHours(){
-
-    const workType = Math.floor(Math.random()*3);   // 0: No Time  , 1: Part Time , 2: Full Time
-    switch (workType){
-        case 0:
-           return 0;
+            return 0;
         case 1:
             return partTime;
         case 2:
@@ -72,24 +28,51 @@ function getDailyWorkingHours(){
     }
 }
 
+function calculateMonthlyWage() {
+    const yearlySummary = [];
+    for (let monthIdx = 0; monthIdx < monthNames.length; monthIdx++) {
+        let totalWorkingHours = 0;
+        let totalWorkingDays = 0;
+        let totalWage = 0;
+        let dailyDetails = [];
 
-function calculateWages(){
-    let totalWorkingHours = 0;
-    let totalWorkingDays = 0;
-    let totalWage = 0;
+        // Loop until we reach max working hours or max working days
+        while (totalWorkingHours < maxWorkingHours && totalWorkingDays < maxWorkingDays) {
+            totalWorkingDays++;
+            const dailyHours = getDailyWorkingHours();
+            const dailyWage = dailyHours * wagePerHour;
 
-    while(totalWorkingHours < maxWorkingHours && totalWorkingDays < maxWorkingDays){
-        totalWorkingDays++
-        const dailyHours = getDailyWorkingHours();
-        totalWorkingHours += dailyHours;
-        totalWage += dailyHours*wagePerHour;
+            totalWorkingHours += dailyHours;
+            totalWage += dailyWage;
 
-        console.log(`Day${totalWorkingDays}: Worked ${dailyHours} hours , Total Hours:${totalWorkingHours} , Daily Wage:$${totalWage}`);
+
+            if (totalWorkingHours >= maxWorkingHours || totalWorkingDays >= maxWorkingDays) {
+                break;
+            }
+        }
+
+        if (totalWorkingHours > 0 && totalWorkingDays > 0){
+            yearlySummary.push({
+                month: monthNames[monthIdx],
+                totalWorkingHours,
+                totalWorkingDays,
+                totalWage,
+                dailyDetails
+            });
+        
+
+        console.log(`Month: ${monthNames[monthIdx]}`);
+        console.log(`Total Working Days: ${totalWorkingDays}`);
+        console.log(`Total Working Hours: ${totalWorkingHours}`);
+        console.log(`Total Wage: $${totalWage}`);
+        }
     }
-    console.log(`Total Working Days:${totalWorkingDays}`);
-    console.log(`Total Working Hours:${totalWorkingHours}`);
-    console.log(`Total Wage:${totalWage}`);
+    return yearlySummary;
 }
 
-calculateWages();
+const yearlyData = calculateMonthlyWage();
+console.log(yearlyData);
+
+
+
 
